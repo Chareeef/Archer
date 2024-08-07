@@ -32,12 +32,6 @@ class StudentManager(models.Manager):
         """
         return super().get_queryset(*args, **kwargs).filter(role=User.Role.STUDENT)
 
-    def create(self, *args, **kwargs):
-        """Create the instance with the role set to STUDENT
-        """
-        kwargs.setdefault('role', User.Role.STUDENT)
-        return super().create(*args, **kwargs)
-
 
 class ParentManager(models.Manager):
     """Manager class for the Parent model
@@ -48,12 +42,6 @@ class ParentManager(models.Manager):
         """
         return super().get_queryset(*args, **kwargs).filter(role=User.Role.PARENT)
 
-    def create(self, *args, **kwargs):
-        """Create the instance with the role set to PARENT
-        """
-        kwargs.setdefault('role', User.Role.PARENT)
-        return super().create(*args, **kwargs)
-
 
 class EducatorManager(models.Manager):
     """Manager class for the Educator model
@@ -63,12 +51,6 @@ class EducatorManager(models.Manager):
         """Override to only return educators within the queryset
         """
         return super().get_queryset(*args, **kwargs).filter(role=User.Role.EDUCATOR)
-
-    def create(self, *args, **kwargs):
-        """Create the instance with the role set to EDUCATOR
-        """
-        kwargs.setdefault('role', User.Role.EDUCATOR)
-        return super().create(*args, **kwargs)
 
 
 class Student(User):
@@ -92,7 +74,6 @@ class Student(User):
 class Parent(User):
     """The Parent model
     """
-    base_type = User.Role.PARENT
 
     # Override the manager so we only get Parent objects
     objects = ParentManager()
@@ -111,7 +92,6 @@ class Parent(User):
 class Educator(User):
     """The Educator model
     """
-    base_type = User.Role.EDUCATOR
 
     # Override the manager so we only get Educator objects
     objects = EducatorManager()
@@ -123,5 +103,5 @@ class Educator(User):
         """Save the instance with the role set to PARENT if not set
         """
         if not self.role:
-            self.role = User.Role.PARENT
+            self.role = User.Role.EDUCATOR
         return super().save(*args, **kwargs)
