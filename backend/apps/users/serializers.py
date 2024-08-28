@@ -4,10 +4,10 @@ from .models import Educator, Parent, Student
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
         fields = [
             'id',
-            'username',
             'email',
             'first_name',
             'last_name',
@@ -16,21 +16,22 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class StudentSerializer(UserSerializer):
+
     class Meta(UserSerializer.Meta):
         model = Student
         fields = UserSerializer.Meta.fields + [
-            'parent_id', 'grade_level', 'sensory_preference', 'communication_preference',
+            'parent_id', 'age', 'grade_level', 'sensory_preference', 'communication_preference',
             'attention_span', 'reading_writing_skills', 'math_skills', 'technology_comfort', 'interests'
         ]
 
     def create(self, validated_data):
         student = Student.objects.create_user(
-            username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             parent_id=validated_data['parent_id'],
+            age=validated_data['age'],
             grade_level=validated_data['grade_level'],
             sensory_preference=validated_data['sensory_preference'],
             communication_preference=validated_data['communication_preference'],
@@ -44,13 +45,13 @@ class StudentSerializer(UserSerializer):
 
 
 class ParentSerializer(UserSerializer):
+
     class Meta(UserSerializer.Meta):
         model = Parent
         fields = UserSerializer.Meta.fields + ['number_of_children']
 
     def create(self, validated_data):
         user = Parent.objects.create_user(
-            username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
             first_name=validated_data['first_name'],
@@ -61,13 +62,13 @@ class ParentSerializer(UserSerializer):
 
 
 class EducatorSerializer(UserSerializer):
+
     class Meta(UserSerializer.Meta):
         model = Educator
         fields = UserSerializer.Meta.fields + ['subject']
 
     def create(self, validated_data):
         user = Educator.objects.create_user(
-            username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
             first_name=validated_data['first_name'],

@@ -8,7 +8,6 @@ class EducatorSignupViewTest(APITestCase):
     def setUp(self):
         self.url = reverse('educator-signup')
         self.data = {
-            'username': 'educator',
             'email': 'educator@example.com',
             'password': 'password123',
             'first_name': 'Edu',
@@ -41,7 +40,6 @@ class ParentSignupViewTest(APITestCase):
     def setUp(self):
         self.url = reverse('parent-signup')
         self.data = {
-            'username': 'parent',
             'email': 'parent@example.com',
             'password': 'password123',
             'first_name': 'Par',
@@ -74,7 +72,6 @@ class StudentSignupViewTest(APITestCase):
     def setUp(self):
         self.url = reverse('student-signup')
         self.parent = Parent.objects.create_user(
-            username='parent',
             email='parent@example.com',
             password='password123',
             first_name='Par',
@@ -82,13 +79,13 @@ class StudentSignupViewTest(APITestCase):
             number_of_children=3
         )
         self.data = {
-            'username': 'student',
             'email': 'student@example.com',
             'password': 'password123',
             'first_name': 'Stu',
             'last_name': 'Dent',
             'parent_id': self.parent.id,
-            'grade_level': '5',
+            'age': 10,
+            'grade_level': 3,
             'sensory_preference': 'HIGH_CONTRAST',
             'communication_preference': 'VERBAL',
             'attention_span': 'MODERATE',
