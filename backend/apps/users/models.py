@@ -4,104 +4,110 @@ from uuid import uuid4
 
 
 class User(AbstractUser):
-    """Our own user model
-    """
-
-    class Role(models.TextChoices):
-        """Class to define our users roles
-        """
-
-        STUDENT = ('STUDENT', 'Student')
-        PARENT = ('PARENT', 'Parent')
-        EDUCATOR = ('EDUCATOR', 'Educator')
-
+    """Base User model"""
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    role = models.CharField(
-        'Role',
-        max_length=20,
-        choices=Role.choices
-    )
-
-
-class StudentManager(models.Manager):
-    """Manager class for the Student model
-    """
-
-    def get_queryset(self, *args, **kwargs):
-        """Override to only return students within the queryset
-        """
-        return super().get_queryset(*args, **kwargs).filter(role=User.Role.STUDENT)
-
-
-class ParentManager(models.Manager):
-    """Manager class for the Parent model
-    """
-
-    def get_queryset(self, *args, **kwargs):
-        """Override to only return parents within the queryset
-        """
-        return super().get_queryset(*args, **kwargs).filter(role=User.Role.PARENT)
-
-
-class EducatorManager(models.Manager):
-    """Manager class for the Educator model
-    """
-
-    def get_queryset(self, *args, **kwargs):
-        """Override to only return educators within the queryset
-        """
-        return super().get_queryset(*args, **kwargs).filter(role=User.Role.EDUCATOR)
-
-
-class Student(User):
-    """The Student model
-    """
-
-    # Override the manager so we only get Student objects
-    objects = StudentManager()
-
-    class Meta:
-        proxy = True
-
-    def save(self, *args, **kwargs):
-        """Save the instance with the role set to STUDENT if not set
-        """
-        if not self.role:
-            self.role = User.Role.STUDENT
-        return super().save(*args, **kwargs)
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
 
 
 class Parent(User):
-    """The Parent model
-    """
-
-    # Override the manager so we only get Parent objects
-    objects = ParentManager()
+    """Parent model with specific fields"""
+    number_of_children = models.PositiveIntegerField()
 
     class Meta:
-        proxy = True
+        db_table = 'parents'
 
-    def save(self, *args, **kwargs):
-        """Save the instance with the role set to PARENT if not set
-        """
-        if not self.role:
-            self.role = User.Role.PARENT
-        return super().save(*args, **kwargs)
+
+class Student(User):
+    """Student model with specific fields"""
+    parent_id = models.ForeignKey(Parent, on_delete=models.CASCADE)
+    grade_level = models.CharField(max_length=10)
+
+    SENSORY_PREFERENCES = [
+        ('LOW_CONTRAST', 'Low Contrast'),
+        ('HIGH_CONTRAST', 'High Contrast'),
+        ('NO_SOUND_EFFECTS', 'No Sound Effects'),
+        ('BACKGROUND_MUSIC', 'Background Music')
+    ]
+    sensory_preference = models.CharField(
+        max_length=20,
+        choices=SENSORY_PREFERENCES
+    )
+
+    COMMUNICATION_PREFERENCES = [
+        ('VERBAL', 'Verbal'),
+        ('NON_VERBAL', 'Non-Verbal')
+    ]
+    communication_preference = models.CharField(
+        max_length=20,
+        choices=COMMUNICATION_PREFERENCES
+    )
+
+    ATTENTION_SPAN = [
+        ('SHORT', 'Short (5-10 Mins)'),
+        ('MODERATE', 'Moderate (10-20 Mins)'),
+        ('LONG', 'Long (20+ Mins)')
+    ]
+    attention_span = models.CharField(
+        max_length=10,
+        choices=ATTENTION_SPAN
+    )
+
+    READING_WRITING_SKILLS = [
+        ('EMERGING', 'Emerging'),
+        ('BASIC', 'Basic'),
+        ('INTERMEDIATE', 'Intermediate'),
+        ('ADVANCED', 'Advanced')
+    ]
+    reading_writing_skills = models.CharField(
+        max_length=12,
+        choices=READING_WRITING_SKILLS
+    )
+
+    MATH_SKILLS = [
+        ('EMERGING', 'Emerging'),
+        ('BASIC', 'Basic'),
+        ('INTERMEDIATE', 'Intermediate'),
+        ('ADVANCED', 'Advanced')
+    ]
+    math_skills = models.CharField(
+        max_length=12,
+        choices=MATH_SKILLS
+    )
+
+    TECH_COMFORT_LEVEL = [
+        ('VERY_COMFORTABLE', 'Very Comfortable'),
+        ('COMFORTABLE', 'Comfortable'),
+        ('NEEDS_ASSISTANCE', 'Needs Assistance'),
+        ('UNCOMFORTABLE', 'Uncomfortable')
+    ]
+    technology_comfort = models.CharField(
+        max_length=20,
+        choices=TECH_COMFORT_LEVEL
+    )
+
+    CHILD_INTERESTS = [
+        ('ANIMALS', 'Animals'),
+        ('SPACE_ASTRONOMY', 'Space & Astronomy'),
+        ('VEHICLES', 'Vehicles'),
+        ('NATURE_ENVIRONMENT', 'Nature & Environment'),
+        ('SUPERHEROES', 'Superheroes'),
+        ('SPORTS', 'Sports'),
+        ('FANTASY_FAIRY_TALES', 'Fantasy & Fairy Tales')
+    ]
+    interests = models.CharField(
+        max_length=30,
+        choices=CHILD_INTERESTS
+    )
+
+    class Meta:
+        db_table = 'students'
 
 
 class Educator(User):
-    """The Educator model
-    """
-
-    # Override the manager so we only get Educator objects
-    objects = EducatorManager()
+    """Educator model with specific fields"""
+    subject = models.CharField(max_length=50)
 
     class Meta:
-        proxy = True
-
-    def save(self, *args, **kwargs):
-        """Save the instance with the role set to PARENT if not set
-        """
-        if not self.role:
-            self.role = User.Role.EDUCATOR
-        return super().save(*args, **kwargs)
+        db_table = 'educators'
