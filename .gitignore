@@ -2,6 +2,8 @@
 *.pyc
 __pycache__
 db.sqlite3
+# Ignore migrations until the database schema becomes stable
+backend/apps/*/migrations/0*.py
 venv/
 
 # Frontend
