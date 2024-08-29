@@ -4,7 +4,6 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from ..models import Student, Parent, Educator
-from ..serializers import StudentSerializer, ParentSerializer, EducatorSerializer
 
 
 class StudentSignInView(APIView):

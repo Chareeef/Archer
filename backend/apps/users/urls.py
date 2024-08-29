@@ -1,6 +1,7 @@
 from django.urls import path
 from .views.signup import EducatorSignupView, ParentSignupView, StudentSignupView
 from .views.signin import StudentSignInView, ParentSignInView, EducatorSignInView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path(
@@ -21,4 +22,5 @@ urlpatterns = [
         'educator/signin/',
         EducatorSignInView.as_view(),
         name='educator-signin'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 ]
