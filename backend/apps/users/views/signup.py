@@ -2,11 +2,13 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import get_user_model
-from .models import Educator, Parent, Student
-from .serializers import UserSerializer, EducatorSerializer, ParentSerializer, StudentSerializer
+from ..models import Educator, Parent, Student
+from ..serializers import UserSerializer, EducatorSerializer, ParentSerializer, StudentSerializer
 
 
 class StudentSignupView(generics.CreateAPIView):
+    """Student Signup view
+    """
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     permission_classes = [AllowAny]
@@ -21,6 +23,8 @@ class StudentSignupView(generics.CreateAPIView):
 
 
 class ParentSignupView(generics.CreateAPIView):
+    """Parent Signup view
+    """
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
     permission_classes = [AllowAny]
@@ -35,6 +39,8 @@ class ParentSignupView(generics.CreateAPIView):
 
 
 class EducatorSignupView(generics.CreateAPIView):
+    """Educator Signup view
+    """
     queryset = Educator.objects.all()
     serializer_class = EducatorSerializer
     permission_classes = [AllowAny]

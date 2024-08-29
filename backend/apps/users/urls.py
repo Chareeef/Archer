@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import EducatorSignupView, ParentSignupView, StudentSignupView
+from .views.signup import EducatorSignupView, ParentSignupView, StudentSignupView
+from .views.signin import StudentSignInView, ParentSignInView, EducatorSignInView
 
 urlpatterns = [
     path(
@@ -11,4 +12,13 @@ urlpatterns = [
         'signup/student/',
         StudentSignupView.as_view(),
         name='student-signup'),
+    path(
+        'student/signin/',
+        StudentSignInView.as_view(),
+        name='student-signin'),
+    path('parent/signin/', ParentSignInView.as_view(), name='parent-signin'),
+    path(
+        'educator/signin/',
+        EducatorSignInView.as_view(),
+        name='educator-signin'),
 ]
