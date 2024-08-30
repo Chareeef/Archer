@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from datetime import datetime, timedelta, timezone
 from ..models import Educator, Parent, Student
 from uuid import uuid4
 
@@ -20,6 +21,15 @@ class UserModelTest(TestCase):
         self.assertEqual(self.user.first_name, 'Test')
         self.assertEqual(self.user.last_name, 'User')
         self.assertTrue(self.user.check_password('password123'))
+
+    def test_created_at(self):
+        created_at = self.user.created_at
+        self.assertIs(type(created_at), datetime)
+        self.assertLessEqual(
+            datetime.now(timezone.utc) -
+            self.user.created_at,
+            timedelta(
+                seconds=0.5))
 
     def test_user_uuid(self):
         self.assertIsInstance(self.user.id, uuid4().__class__)
