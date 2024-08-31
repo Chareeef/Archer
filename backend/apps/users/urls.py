@@ -1,7 +1,8 @@
 from django.urls import path
 from .views.signup import EducatorSignupView, ParentSignupView, StudentSignupView
-from .views.signin import StudentSignInView, ParentSignInView, EducatorSignInView
+from .views.signin import EducatorSignInView, ParentSignInView, StudentSignInView
 from .views.signout import SignoutView
+from .views.detail import EducatorDetailView, ParentDetailView, StudentDetailView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -24,5 +25,8 @@ urlpatterns = [
         EducatorSignInView.as_view(),
         name='educator-signin'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
-    path('signout/', SignoutView.as_view(), name='signout')
+    path('signout/', SignoutView.as_view(), name='signout'),
+    path('student/', StudentDetailView.as_view(), name='student-detail'),
+    path('parent/', ParentDetailView.as_view(), name='parent-detail'),
+    path('educator/', EducatorDetailView.as_view(), name='educator-detail'),
 ]
