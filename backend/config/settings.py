@@ -19,13 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_APP_SECRET')
-
-DEBUG = True
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -53,9 +48,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if os.getenv('EFA_ENV') == 'development':
+if os.getenv('ARCHER_ENV') == 'production':
+    ALLOWED_HOSTS = ['.vercel.apps']
+    DEBUG = False
+else:
     ALLOWED_HOSTS = ['*']
     CORS_ALLOW_ALL_ORIGINS = True
+    DEBUG = True
 
 ROOT_URLCONF = 'config.urls'
 
@@ -77,15 +76,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+if os.getenv('ARCHER_ENV') == 'production':
+    db = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+else:
+    db = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+DATABASES = {
+    'default': db
 }
 
 # Authentication User
@@ -132,6 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

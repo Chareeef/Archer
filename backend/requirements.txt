@@ -1,7 +1,6 @@
 asgiref==3.8.1
 astroid==3.2.4
 autopep8==2.3.1
-backports.zoneinfo==0.2.1
 dill==0.3.8
 Django==4.2.15
 django-cors-headers==4.4.0
@@ -12,6 +11,7 @@ jedi==0.19.1
 mccabe==0.7.0
 parso==0.8.4
 platformdirs==4.2.2
+psycopg2-binary==2.9.9
 pycodestyle==2.12.1
 PyJWT==2.9.0
 pylint==3.2.6
