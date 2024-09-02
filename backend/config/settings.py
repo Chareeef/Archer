@@ -49,9 +49,11 @@ MIDDLEWARE = [
 ]
 
 if os.getenv('ARCHER_ENV') == 'production':
-    ALLOWED_HOSTS = ['*.vercel.app']
+    print("////\nPRODUCTION\n////")
+    ALLOWED_HOSTS = ['.vercel.app']
     DEBUG = False
 else:
+    print("////\nDEVLOPMENT\n////")
     ALLOWED_HOSTS = ['*']
     CORS_ALLOW_ALL_ORIGINS = True
     DEBUG = True
