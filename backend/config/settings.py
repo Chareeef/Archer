@@ -49,7 +49,7 @@ MIDDLEWARE = [
 ]
 
 if os.getenv('ARCHER_ENV') == 'production':
-    ALLOWED_HOSTS = ['.vercel.apps']
+    ALLOWED_HOSTS = ['archer-backend-iota.vercel.app']
     DEBUG = False
 else:
     ALLOWED_HOSTS = ['*']
