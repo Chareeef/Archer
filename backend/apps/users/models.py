@@ -1,5 +1,7 @@
+from custom_types.enums import Subject
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from enumfields import EnumField
 from uuid import uuid4
 
 
@@ -150,7 +152,7 @@ class Student(User):
 
 class Educator(User):
     """Educator model with specific fields"""
-    subject = models.CharField(max_length=50)
+    subject = EnumField(Subject, max_length=20)
 
     class Meta:
         db_table = 'educators'
