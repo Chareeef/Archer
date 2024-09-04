@@ -39,8 +39,8 @@ class DeleteLessonViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Lesson.objects.count(), 0)
 
-    def test_delete_inexistent_lesson_as_owner(self):
-        """Test deleting an inexistent lesson."""
+    def test_delete_nonexistent_lesson_as_owner(self):
+        """Test deleting an nonexistent lesson."""
         # Delete our lesson
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
