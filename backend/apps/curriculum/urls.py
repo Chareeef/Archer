@@ -4,6 +4,10 @@ from .views import lesson_views
 urlpatterns = [
     path(
         'lessons/create_lesson/',
+        lesson_views.RetrieveLessonView.as_view(),
+        name='create-lesson'),
+    path(
+        'lessons/create_lesson/',
         lesson_views.CreateLessonView.as_view(),
         name='create-lesson'),
     path(

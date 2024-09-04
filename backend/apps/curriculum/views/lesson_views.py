@@ -1,9 +1,17 @@
 from rest_framework import generics
 from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from ..models import Lesson
 from ..permissions import IsEducator, IsLessonOwner
 from ..serializers import LessonSerializer
+
+
+class RetrieveLessonView(generics.RetrieveAPIView):
+    """View to retrieve a lesson by ID for any authenticated user"""
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class CreateLessonView(generics.CreateAPIView):
