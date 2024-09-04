@@ -12,7 +12,7 @@ class Lesson(models.Model):
     subject = EnumField(Subject, max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     educator_id = models.ForeignKey(
-        Educator, null=True, on_delete=models.CASCADE)
+        Educator, null=True, on_delete=models.CASCADE, related_name='lessons')
     grade_level = models.PositiveIntegerField()
     title = models.CharField(max_length=60)
     text = models.TextField()
