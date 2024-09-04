@@ -1,4 +1,5 @@
 from rest_framework.permissions import BasePermission
+from apps.users.models import Educator
 
 
 class IsEducator(BasePermission):
@@ -6,4 +7,7 @@ class IsEducator(BasePermission):
     """
 
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated and request.user.educator
+        try:
+            return request.user and request.user.is_authenticated and request.user.educator
+        except Educator.DoesNotExist:
+            return None
