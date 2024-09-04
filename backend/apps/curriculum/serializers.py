@@ -12,6 +12,7 @@ class LessonSerializer(EnumSupportSerializerMixin,
         model = Lesson
         fields = [
             'id',
+            'educator_id',
             'subject',
             'created_at',
             'grade_level',
@@ -19,12 +20,3 @@ class LessonSerializer(EnumSupportSerializerMixin,
             'text',
             'video_link']
         read_only_fields = ['educator_id']
-
-    def update(self, instance, validated_data):
-        """Override to permit partial updating
-        """
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-
-        instance.save()
-        return instance

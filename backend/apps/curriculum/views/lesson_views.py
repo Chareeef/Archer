@@ -1,4 +1,6 @@
 from rest_framework import generics
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
 from ..models import Lesson
 from ..permissions import IsEducator, IsLessonOwner
 from ..serializers import LessonSerializer
@@ -22,3 +24,16 @@ class UpdateLessonView(generics.UpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsLessonOwner]
+
+    def update(self, request, *args, **kwargs):
+        """Update lesson instance with any provided fields
+        """
+        if 'educator_id' in request.data:
+            raise ValidationError({'detail': 'educator_id can not be changed'})
+
+        instance = self.get_object()
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)

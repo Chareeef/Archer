@@ -19,8 +19,6 @@ class IsLessonOwner(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         try:
-            print(request.user.__dict__)
-            print(obj.__dict__)
             return request.user and request.user.is_authenticated and obj.educator_id == request.user.educator
         except Educator.DoesNotExist:
             return None
