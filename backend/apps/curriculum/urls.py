@@ -1,13 +1,17 @@
 from django.urls import path
-from .views.lesson_views import CreateLessonView, UpdateLessonView
+from .views import lesson_views
 
 urlpatterns = [
     path(
         'lessons/create_lesson/',
-        CreateLessonView.as_view(),
+        lesson_views.CreateLessonView.as_view(),
         name='create-lesson'),
     path(
         'lessons/update_lesson/<uuid:pk>/',
-        UpdateLessonView.as_view(),
+        lesson_views.UpdateLessonView.as_view(),
         name='update-lesson'),
+    path(
+        'lessons/delete_lesson/<uuid:pk>/',
+        lesson_views.DeleteLessonView.as_view(),
+        name='delete-lesson'),
 ]

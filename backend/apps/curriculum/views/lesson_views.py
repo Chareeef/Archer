@@ -37,3 +37,11 @@ class UpdateLessonView(generics.UpdateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+
+
+class DeleteLessonView(generics.DestroyAPIView):
+    """View to delete a lesson
+    """
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [IsLessonOwner]
