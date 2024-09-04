@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from enumfields.drf.serializers import EnumSupportSerializerMixin
 from .models import Educator, Parent, Student
 
 
@@ -15,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
 
-class StudentSerializer(UserSerializer):
+class StudentSerializer(EnumSupportSerializerMixin, UserSerializer):
 
     class Meta(UserSerializer.Meta):
         model = Student
@@ -61,7 +62,7 @@ class ParentSerializer(UserSerializer):
         return user
 
 
-class EducatorSerializer(UserSerializer):
+class EducatorSerializer(EnumSupportSerializerMixin, UserSerializer):
 
     class Meta(UserSerializer.Meta):
         model = Educator

@@ -30,6 +30,14 @@ class EducatorSignupViewTest(APITestCase):
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_educator_signup_with_wrong_subject(self):
+        data = self.data.copy()
+        data['subject'] = 'Alchemy'
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.data['subject'][0], '"Alchemy" is not a valid choice.')
+
     def test_educator_signup_duplicate_email(self):
         Educator.objects.create_user(**self.data)
         response = self.client.post(self.url, self.data, format='json')
@@ -86,13 +94,13 @@ class StudentSignupViewTest(APITestCase):
             'parent_id': self.parent.id,
             'age': 10,
             'grade_level': 3,
-            'sensory_preference': 'HIGH_CONTRAST',
-            'communication_preference': 'VERBAL',
-            'attention_span': 'MODERATE',
-            'reading_writing_skills': 'INTERMEDIATE',
-            'math_skills': 'ADVANCED',
-            'technology_comfort': 'COMFORTABLE',
-            'interests': 'SPACE_ASTRONOMY'
+            'sensory_preference': 'High contrast',
+            'communication_preference': 'Verbal',
+            'attention_span': 'Moderate',
+            'reading_writing_skills': 'Intermediate',
+            'math_skills': 'Advanced',
+            'technology_comfort': 'Comfortable',
+            'interests': 'Space & Astronomy'
         }
 
     def tearDown(self):
@@ -117,3 +125,11 @@ class StudentSignupViewTest(APITestCase):
         Student.objects.create_user(**data)
         response = self.client.post(self.url, self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_student_signup_with_wrong_interest(self):
+        data = self.data.copy()
+        data['interests'] = 'Aliens'
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.data['interests'][0], '"Aliens" is not a valid choice.')

@@ -40,13 +40,13 @@ class StudentDetailViewTest(APITestCase):
             parent_id=self.parent,
             age=10,
             grade_level=5,
-            sensory_preference='LOW_CONTRAST',
-            communication_preference='VERBAL',
-            attention_span='MODERATE',
-            reading_writing_skills='INTERMEDIATE',
-            math_skills='INTERMEDIATE',
-            technology_comfort='COMFORTABLE',
-            interests='ANIMALS'
+            sensory_preference='Low contrast',
+            communication_preference='Verbal',
+            attention_span='Moderate',
+            reading_writing_skills='Intermediate',
+            math_skills='Intermediate',
+            technology_comfort='Comfortable',
+            interests='Animals'
         )
         self.student_token = get_token_for_user(self.student)
 
@@ -298,7 +298,7 @@ class EducatorDetailViewTest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.educator.refresh_from_db()
-        self.assertEqual(self.educator.subject, 'Physics')
+        self.assertEqual(self.educator.subject._value_, 'Physics')
         self.assertEqual(self.educator.first_name, 'Severus')
         self.assertEqual(self.educator.last_name, 'Example')
 
@@ -343,6 +343,23 @@ class EducatorDetailViewTest(APITestCase):
         response = self.client.put(reverse('educator-detail'), update_data)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_update_educator_wrong_subject(self):
+        """Test the PUT method with wrong subject"""
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Bearer ' +
+            self.educator_token)
+
+        update_data = {
+            'subject': 'Alchemy',
+            'first_name': 'Severus'
+        }
+
+        response = self.client.put(reverse('educator-detail'), update_data)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.data['subject'][0], '"Alchemy" is not a valid choice.')
 
     def test_delete_educator_no_token(self):
         """Test the DELETE method with no authentication token."""

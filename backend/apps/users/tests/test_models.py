@@ -60,24 +60,32 @@ class StudentModelTest(TestCase):
             parent_id=self.parent,
             age=3,
             grade_level=5,
-            sensory_preference='HIGH_CONTRAST',
-            communication_preference='VERBAL',
-            attention_span='MODERATE',
-            reading_writing_skills='INTERMEDIATE',
-            math_skills='ADVANCED',
-            technology_comfort='COMFORTABLE',
-            interests='SPACE_ASTRONOMY'
+            sensory_preference='High contrast',
+            communication_preference='Verbal',
+            attention_span='Moderate',
+            reading_writing_skills='Intermediate',
+            math_skills='Advanced',
+            technology_comfort='Comfortable',
+            interests='Space & Astronomy'
         )
 
     def test_student_creation(self):
         self.assertEqual(self.student.grade_level, 5)
-        self.assertEqual(self.student.sensory_preference, 'HIGH_CONTRAST')
-        self.assertEqual(self.student.communication_preference, 'VERBAL')
-        self.assertEqual(self.student.attention_span, 'MODERATE')
-        self.assertEqual(self.student.reading_writing_skills, 'INTERMEDIATE')
-        self.assertEqual(self.student.math_skills, 'ADVANCED')
-        self.assertEqual(self.student.technology_comfort, 'COMFORTABLE')
-        self.assertEqual(self.student.interests, 'SPACE_ASTRONOMY')
+        self.assertEqual(
+            self.student.sensory_preference._value_,
+            'High contrast')
+        self.assertEqual(
+            self.student.communication_preference._value_,
+            'Verbal')
+        self.assertEqual(self.student.attention_span._value_, 'Moderate')
+        self.assertEqual(
+            self.student.reading_writing_skills._value_,
+            'Intermediate')
+        self.assertEqual(self.student.math_skills._value_, 'Advanced')
+        self.assertEqual(
+            self.student.technology_comfort._value_,
+            'Comfortable')
+        self.assertEqual(self.student.interests._value_, 'Space & Astronomy')
 
     def test_student_parent_relationship(self):
         self.assertEqual(self.student.parent_id, self.parent)
@@ -108,4 +116,4 @@ class EducatorModelTest(TestCase):
         )
 
     def test_educator_creation(self):
-        self.assertEqual(self.educator.subject, 'Mathematics')
+        self.assertEqual(self.educator.subject._value_, 'Mathematics')
