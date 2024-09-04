@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
 
-class StudentSerializer(UserSerializer):
+class StudentSerializer(EnumSupportSerializerMixin, UserSerializer):
 
     class Meta(UserSerializer.Meta):
         model = Student

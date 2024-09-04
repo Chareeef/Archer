@@ -28,7 +28,14 @@ class StudentSignInViewTest(APITestCase):
             password=self.student_password,
             parent_id=self.parent,
             age=12,
-            grade_level=5
+            grade_level=5,
+            sensory_preference='High contrast',
+            communication_preference='Verbal',
+            attention_span='Moderate',
+            reading_writing_skills='Intermediate',
+            math_skills='Advanced',
+            technology_comfort='Comfortable',
+            interests='Space & Astronomy'
         )
         self.client = APIClient()
         self.url = reverse('student-signin')
