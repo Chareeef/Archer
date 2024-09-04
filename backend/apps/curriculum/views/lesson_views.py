@@ -1,9 +1,10 @@
-from rest_framework.generics import CreateAPIView
-from ..permissions import IsEducator
+from rest_framework import generics
+from ..models import Lesson
+from ..permissions import IsEducator, IsLessonOwner
 from ..serializers import LessonSerializer
 
 
-class CreateLessonView(CreateAPIView):
+class CreateLessonView(generics.CreateAPIView):
     """View to create lessons
     """
     serializer_class = LessonSerializer
@@ -13,3 +14,11 @@ class CreateLessonView(CreateAPIView):
         """Save the lesson with the properly configured educator_id
         """
         serializer.save(educator_id=self.request.user.educator)
+
+
+class UpdateLessonView(generics.UpdateAPIView):
+    """View to update a lesson
+    """
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [IsLessonOwner]
