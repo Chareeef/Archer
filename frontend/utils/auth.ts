@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types";
 
-const API_URL = process.env.BACKEND_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 interface LoginResponse {
   access: string;

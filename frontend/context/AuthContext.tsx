@@ -1,5 +1,6 @@
+"use client";
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 import { login, logout, isAuthenticated, getAccessToken } from "../utils/auth";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types";
@@ -19,13 +20,11 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<DecodedToken | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const token = getAccessToken();
     if (token) {
       const decoded: DecodedToken = jwtDecode(token);
-      console.log(decoded);
       setUser(decoded);
     }
   }, []);
@@ -33,13 +32,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const handleLogin = async (role: string, email: string, password: string) => {
     const decoded = await login(role, email, password);
     setUser(decoded);
-    router.push("/");
   };
 
   const handleLogout = async () => {
     await logout();
     setUser(null);
-    router.push("/login");
+    redirect("/signin");
   };
 
   return (
