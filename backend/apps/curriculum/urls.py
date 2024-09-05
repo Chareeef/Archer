@@ -18,4 +18,5 @@ urlpatterns = [
         'lessons/delete_lesson/<uuid:pk>/',
         lesson_views.DeleteLessonView.as_view(),
         name='delete-lesson'),
+    path('lessons/', lesson_views.ListLessonView.as_view(), name='list-lessons'),
 ]

@@ -1,10 +1,7 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
 from datetime import datetime, timedelta, timezone
-from ..models import Educator, Parent, Student
+from ..models import User, Educator, Parent, Student
 from uuid import uuid4
-
-User = get_user_model()
 
 
 class UserModelTest(TestCase):

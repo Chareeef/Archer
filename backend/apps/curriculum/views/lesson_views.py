@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -5,6 +6,8 @@ from rest_framework.response import Response
 from ..models import Lesson
 from ..permissions import IsEducator, IsLessonOwner
 from ..serializers import LessonSerializer
+from ..filters import LessonFilter
+from ..pagination import LessonPagination
 
 
 class RetrieveLessonView(generics.RetrieveAPIView):
@@ -53,3 +56,13 @@ class DeleteLessonView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsLessonOwner]
+
+
+class ListLessonView(generics.ListAPIView):
+    """View to list lessons with optional query filters and pagination"""
+    queryset = Lesson.objects.all().order_by('-created_at')
+    serializer_class = LessonSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = LessonFilter
+    pagination_class = LessonPagination
