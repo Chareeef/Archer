@@ -1,11 +1,10 @@
 "use client";
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { redirect } from "next/navigation";
 import { login, logout, isAuthenticated, getAccessToken } from "../utils/auth";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types";
 
-interface AuthContextProps {
+export interface AuthContextProps {
   user: DecodedToken | null;
   handleLogin: (role: string, email: string, password: string) => Promise<void>;
   handleLogout: () => Promise<void>;
@@ -31,13 +30,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const handleLogin = async (role: string, email: string, password: string) => {
     const decoded = await login(role, email, password);
+    decoded.role = role;
     setUser(decoded);
   };
 
   const handleLogout = async () => {
     await logout();
     setUser(null);
-    redirect("/signin");
   };
 
   return (
