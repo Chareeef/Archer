@@ -45,7 +45,8 @@ export const isAuthenticated = (): boolean => {
 };
 
 export const logout = async (): Promise<void> => {
-  await axios.post(`${API_URL}/users/signout/`);
+  const refresh_token = localStorage.getItem("refresh_token");
+  await axios.post(`${API_URL}/users/signout/`, { refresh: refresh_token });
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
 };

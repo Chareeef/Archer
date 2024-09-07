@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { AlertProvider } from "@/context/AlertContext";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Archer",
   description: "Educational platform for children with autism.",
 };
+
+const OpenSans = Open_Sans({ weight: "400", subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -15,15 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="en">
+      <html lang="en" className={OpenSans.className}>
         <body className="relative flex flex-col items-center justify-around">
-          <header className="h-10 w-full flex items-center bg-black">
-            header
-          </header>
-          <AlertProvider>{children}</AlertProvider>
-          <footer className="h-10 w-full flex items-center bg-black">
-            footer
-          </footer>
+          <AlertProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AlertProvider>
         </body>
       </html>
     </AuthProvider>
