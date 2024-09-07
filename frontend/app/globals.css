@@ -8,6 +8,10 @@
 	padding: 0;
 }
 
+.btn {
+	@apply bg-blue-700 border-2 border-gray-400 hover:bg-sky-800 hover:scale-110 transition-transform ease-in-out duration-300;
+}
+
 .btn-header {
-	@apply px-2 py-1 border-2 border-blue-700 rounded-lg bg-sky-600 hover:scale-110 transition-transform ease-in-out duration-300;
+	@apply px-2 py-1 bg-blue-700 border-2 border-gray-400 rounded-lg hover:bg-sky-800 hover:scale-110 transition-transform ease-in-out duration-300;
 }
