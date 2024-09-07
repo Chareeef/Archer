@@ -3,6 +3,7 @@ import React, { useState, useContext } from "react";
 import AuthContext from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useAlert } from "@/context/AlertContext";
+import Image from "next/image";
 
 const SignIn = () => {
   const { handleLogin } = useContext(AuthContext)!;
@@ -30,9 +31,16 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold text-center">Sign In</h2>
+    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-sky-100">
+      <div className="w-full max-w-md px-12 py-4 bg-white rounded-lg shadow-md">
+        <Image
+          src="/icons/logo.png"
+          alt="Archer logo"
+          height={96}
+          width={142}
+          className="h-[6.6rem] w-[10rem] mx-auto"
+        />
+        <h1 className="mb-4 text-2xl font-bold text-center">Sign In</h1>
 
         {/* Toggle Bar */}
         <div className="flex justify-around mt-4">
@@ -88,7 +96,7 @@ const SignIn = () => {
 
           <button
             type="submit"
-            className="w-full py-2 mt-6 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+            className="w-full py-2 mt-6 text-white btn rounded-md"
           >
             Sign In as {role.charAt(0).toUpperCase() + role.slice(1)}
           </button>

@@ -16,7 +16,6 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   const showAlert = (message: string, type: "success" | "error" | "info") => {
     setAlert({ message, type });
     setIsVisible(true); // Show the alert
-    console.log(message);
 
     // Automatically hide the alert after 3 seconds
     setTimeout(() => {
@@ -31,7 +30,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
     <AlertContext.Provider value={{ showAlert }}>
       {alert && (
         <div
-          className={`absolute top-[20svh] flex items-center justify-center px-2 py-1 rounded-lg text-center w-fit ${isVisible ? "opacity-100" : "opacity-0"} transition-all duration-500 ease-in-out ${getAlertClasses(alert.type)}`}
+          className={`fixed top-[10svh] flex items-center justify-center px-2 py-1 rounded-lg text-center w-fit ${isVisible ? "opacity-100" : "opacity-0"} transition-all duration-500 ease-in-out ${getAlertClasses(alert.type)}`}
         >
           {alert.message}
         </div>

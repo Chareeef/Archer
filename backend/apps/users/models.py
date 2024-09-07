@@ -65,7 +65,7 @@ class Parent(User):
 
 class Student(User):
     """Student model with specific fields"""
-    parent_id = models.ForeignKey(Parent, on_delete=models.CASCADE)
+    parent_id = models.ForeignKey(Parent, on_delete=models.CASCADE, null=True)
     age = models.PositiveIntegerField()
     grade_level = models.PositiveIntegerField()
     sensory_preference = EnumField(enums.SensoryPreferences, max_length=20)
