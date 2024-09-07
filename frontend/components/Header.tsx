@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex flex-col items-center justify-between w-full p-4 text-center text-white border-b-2 bg-gradient-to-t from-sky-200 to-white border-sky-800 md:flex-row">
+    <header className="flex flex-col items-center justify-between w-full p-4 text-center text-white border-b-2 gap-y-4 bg-gradient-to-t from-sky-200 to-white border-sky-800 md:flex-row">
       <Link href="/" className="flex items-center text-xl">
         <Image
           src="/icons/logo.png"

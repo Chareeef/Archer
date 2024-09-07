@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { AlertProvider } from "@/context/AlertContext";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Archer",
@@ -24,10 +25,8 @@ export default function RootLayout({
           <AlertProvider>
             <Header />
             {children}
+            <Footer />
           </AlertProvider>
-          <footer className="flex items-center w-full h-10 bg-black">
-            footer
-          </footer>
         </body>
       </html>
     </AuthProvider>
