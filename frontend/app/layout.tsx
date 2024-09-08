@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en" className={OpenSans.className}>
-        <body className="relative flex flex-col items-center justify-around">
+        <body className="relative flex flex-col items-center min-h-dvh">
           <AlertProvider>
             <Header />
             {children}

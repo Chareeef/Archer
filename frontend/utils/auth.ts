@@ -20,21 +20,32 @@ export const login = async (
   );
   localStorage.setItem("access_token", response.data.access);
   localStorage.setItem("refresh_token", response.data.refresh);
+  localStorage.setItem("role", role);
   const decoded: DecodedToken = jwtDecode(response.data.access);
   return decoded;
 };
 
-export const refreshToken = async (): Promise<void> => {
+export const refreshToken = async (): Promise<boolean> => {
   const refresh_token = localStorage.getItem("refresh_token");
-  const response = await axios.post<LoginResponse>(
-    `${API_URL}/users/token/refresh/`,
-    { refresh: refresh_token },
-  );
-  localStorage.setItem("access_token", response.data.access);
+  try {
+    const response = await axios.post<LoginResponse>(
+      `${API_URL}/users/token/refresh/`,
+      { refresh: refresh_token },
+    );
+    localStorage.setItem("access_token", response.data.access);
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const getAccessToken = (): string | null => {
-  return localStorage.getItem("access_token");
+  // Check if we're in a browser environment (client-side)
+  if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
+    const token = localStorage.getItem("access_token");
+    return token;
+  }
+  return null; // Return null if we're on the server side
 };
 
 export const isAuthenticated = (): boolean => {

@@ -1,6 +1,12 @@
 "use client";
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { login, logout, isAuthenticated, getAccessToken } from "../utils/auth";
+import {
+  login,
+  logout,
+  isAuthenticated,
+  getAccessToken,
+  refreshToken,
+} from "../utils/auth";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types";
 
@@ -8,6 +14,7 @@ export interface AuthContextProps {
   user: DecodedToken | null;
   handleLogin: (role: string, email: string, password: string) => Promise<void>;
   handleLogout: () => Promise<void>;
+  handleRefresh: () => Promise<boolean>;
   isAuthenticated: () => boolean;
 }
 
@@ -24,6 +31,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const token = getAccessToken();
     if (token) {
       const decoded: DecodedToken = jwtDecode(token);
+      decoded.role = localStorage.getItem("role") || "";
       setUser(decoded);
     }
   }, []);
@@ -35,13 +43,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const handleLogout = async () => {
-    await logout();
-    setUser(null);
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setUser(null);
+    }
   };
 
+  const handleRefresh = async () => {
+    try {
+      const refreshed = await refreshToken();
+      return refreshed;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
   return (
     <AuthContext.Provider
-      value={{ user, handleLogin, handleLogout, isAuthenticated }}
+      value={{
+        user,
+        handleLogin,
+        handleLogout,
+        handleRefresh,
+        isAuthenticated,
+      }}
     >
       {children}
     </AuthContext.Provider>
