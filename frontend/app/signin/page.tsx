@@ -18,7 +18,7 @@ const SignIn = () => {
     try {
       await handleLogin(role, email, password);
       showAlert("Signed in successfully!", "success");
-      router.push("/");
+      router.push(`/dashboard_${role}`);
     } catch (err) {
       const error = err as { status: number };
       const status_code = error.status as number;

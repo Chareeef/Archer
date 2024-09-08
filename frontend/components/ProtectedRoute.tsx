@@ -1,6 +1,8 @@
+"use client";
 import { useContext, useEffect, ReactNode } from "react";
-import { useRouter } from "next/router";
-import AuthContext from "../context/AuthContext";
+import { useRouter } from "next/navigation";
+import AuthContext from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -10,6 +12,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
   const authContext = useContext(AuthContext);
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     if (
@@ -18,7 +21,8 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
         typeof authContext.user?.role === "string" &&
         !allowedRoles.includes(authContext.user.role))
     ) {
-      router.push("/login");
+      showAlert("You are not allowed to access this page.", "error");
+      router.push("/signin");
     }
   }, [authContext, authContext?.user, allowedRoles, router]);
 

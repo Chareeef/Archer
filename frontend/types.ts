@@ -1,4 +1,6 @@
 export interface DecodedToken {
-  exp: number;
+  user_id: string;
   role: string;
+  token_type: string;
+  exp: number;
 }

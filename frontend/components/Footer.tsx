@@ -40,22 +40,14 @@ export default function Footer() {
             <h4 className="w-2/3 mr-2 font-semibold">Qudsiya Badri:</h4>
             <Link
               className="hover:text-sky-800"
-              href="https://github.com/Chareeef"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub size={20} />
-            </Link>
-            <Link
-              className="hover:text-sky-800"
-              href="https://linkedin.com/in/youssef-charif-hamidi"
+              href="https://linkedin.com/in/qudsiya-badri"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaLinkedin size={20} />
             </Link>
             <Link
-              href="https://x.com/YoussefCharifH2"
+              href="https://x.com/QudsiyaBadri"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center hover:text-sky-800"
