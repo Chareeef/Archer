@@ -80,7 +80,7 @@ export default function StudentSignupForm() {
       if (data) {
         let errorString = "";
 
-        for (let key in data) {
+        for (const key in data) {
           if (data.hasOwnProperty(key)) {
             errorString += `${key}: ${data[key][0]}\n`;
           }
@@ -92,6 +92,7 @@ export default function StudentSignupForm() {
       }
     }
   };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <input

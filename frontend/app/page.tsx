@@ -8,7 +8,8 @@ export default function LandingPage() {
       <section className="w-full py-12 text-center bg-blue-50">
         <div className="flex flex-col items-center justify-around p-4 md:flex-row gap-8">
           <h1 className="text-4xl font-bold text-blue-800">
-            The world's first education app tailored for children with autism
+            The world{"'"}s first education app tailored for children with
+            autism
           </h1>
           <Image
             src="/target.png"
@@ -95,7 +96,7 @@ export default function LandingPage() {
       <section className="flex flex-col items-center w-full px-4 py-12 text-center bg-blue-100">
         <h2 className="text-3xl font-bold text-blue-800">Help Us Improve!</h2>
         <p className="mt-4 text-gray-600">
-          Your feedback will help shape ARCHER Education to meet students'
+          Your feedback will help shape ARCHER Education to meet students{"' "}
           unique needs.
         </p>
         <Link

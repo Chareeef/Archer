@@ -37,7 +37,7 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
     };
 
     checkUser();
-  }, [authContext, authContext?.user, allowedRoles, router]);
+  }, [authContext, authContext?.user, allowedRoles, router, showAlert]);
 
   return <>{children}</>;
 };
