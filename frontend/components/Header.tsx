@@ -32,7 +32,6 @@ export default function Header() {
           width={142}
           className="h-[3.3rem] w-[5rem] mr-3"
         />
-        <div className="text-2xl font-extrabold text-blue-800">Archer</div>
       </Link>
       <div className="flex items-center justify-around text-lg gap-x-4">
         {user ? (

@@ -7,10 +7,15 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="w-full py-12 text-center bg-blue-50">
         <div className="flex flex-col items-center justify-around p-4 md:flex-row gap-8">
-          <h1 className="text-4xl font-bold text-blue-800">
-            The world{"'"}s first education app tailored for children with
-            autism
-          </h1>
+          <div className="flex-col">
+            <h1 className="mb-4 font-extrabold text-blue-800 text-7xl">
+              ARCHER
+            </h1>
+            <h2 className="text-2xl font-bold text-blue-800">
+              The world{"'"}s first education app tailored for children with
+              autism.
+            </h2>
+          </div>
           <Image
             src="/target.png"
             alt="target"
@@ -36,57 +41,68 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="w-full py-12 bg-white">
+      <section className="w-full px-4 py-12 bg-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-blue-800">Features</h2>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Feature 1 */}
-            <div className="flex flex-col items-center">
+          <div className="flex flex-col mt-8">
+            {/* Reading & Writing */}
+            <div className="flex flex-col w-full md:grid md:grid-cols-2 gap-16">
               <Image
-                src="/science.png"
-                alt="Multi-sensory Learning"
-                width={617}
-                height={789}
-                className="w-48 h-52"
-              />
-              <h3 className="mt-4 text-xl font-bold text-blue-700">Science</h3>
-              <p className="mt-2 text-gray-600">
-                Learning science never been more fun.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="flex flex-col items-center">
-              <Image
-                src="/english.png"
+                src="/reading_writing.png"
                 alt="Reading & Writing"
-                width={617}
-                height={789}
-                className="w-48 h-52"
+                width={1024}
+                height={1024}
+                className="size-auto"
               />
-              <h3 className="mt-4 text-xl font-bold text-blue-700">
-                Reading & Writing
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Interactive tools and activities to enhance literacy skills.
-              </p>
+              <div className="flex flex-col items-center justify-center">
+                <h3 className="mt-4 text-xl font-bold text-blue-700">
+                  Reading & Writing
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  Reading & Writing Interactive tools and activities designed to
+                  enhance literacy skills and make learning fun.
+                </p>
+              </div>
             </div>
 
-            {/* Feature 3 */}
-            <div className="flex flex-col items-center">
+            {/* Mathematics */}
+            <div className="flex flex-col-reverse w-full md:grid md:grid-cols-2 gap-16">
+              <div className="flex flex-col items-center justify-center">
+                <h3 className="mt-4 text-xl font-bold text-blue-700">
+                  Mathematics
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  Simplified tutorials and exercises to help students grasp math
+                  concepts with ease.
+                </p>
+              </div>
               <Image
                 src="/mathematics.png"
                 alt="Mathematics"
-                width={617}
-                height={789}
-                className="w-48 h-52"
+                width={1024}
+                height={1024}
+                className="size-auto"
               />
-              <h3 className="mt-4 text-xl font-bold text-blue-700">
-                Mathematics
-              </h3>
-              <p className="mt-2 text-gray-600">
-                Simplified tutorials to help students grasp math concepts.
-              </p>
+            </div>
+
+            {/* Science */}
+            <div className="flex flex-col w-full md:grid md:grid-cols-2 gap-16">
+              <Image
+                src="/science.png"
+                alt="Science"
+                width={1024}
+                height={1024}
+                className="size-auto"
+              />
+              <div className="flex flex-col items-center justify-center">
+                <h3 className="mt-4 text-xl font-bold text-blue-700">
+                  Science
+                </h3>
+                <p className="mt-2 text-gray-600">
+                  Engaging experiments and lessons to foster curiosity and
+                  understanding in science.
+                </p>
+              </div>
             </div>
           </div>
         </div>

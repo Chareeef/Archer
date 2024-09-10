@@ -5,6 +5,7 @@ import axiosClient from "@/utils/axiosClient";
 import { StudentDataFields } from "./types";
 import StudentProfile from "./components/StudentProfile";
 import UpdateProfileModal from "./components/UpdateStudentProfile";
+import ListLessons from "./components/ListLessons";
 
 export default function StudentDashboard() {
   const [studentData, setStudentData] = useState<StudentDataFields | undefined>(
@@ -35,6 +36,7 @@ export default function StudentDashboard() {
                 studentData={studentData}
                 onOpen={() => setIsModalOpen(true)}
               />
+              <ListLessons grade_level={studentData.grade_level} />
             </div>
 
             {isModalOpen && (
