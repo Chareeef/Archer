@@ -1,5 +1,6 @@
 "use client";
 import { useContext } from "react";
+import { useRouter } from "next/navigation";
 import AuthContext, { AuthContextProps } from "@/context/AuthContext";
 import Link from "next/link";
 import { useAlert } from "@/context/AlertContext";
@@ -8,11 +9,13 @@ import Image from "next/image";
 export default function Header() {
   const { user, handleLogout } = useContext(AuthContext) as AuthContextProps;
   const { showAlert } = useAlert();
+  const router = useRouter();
 
   const handleClickSignOut = async () => {
     try {
-      handleLogout();
+      await handleLogout();
       showAlert("Signed out successfully.", "info");
+      router.push("/signin");
     } catch (error) {
       console.error(error);
       showAlert("Something went wrong.", "error");
@@ -29,7 +32,6 @@ export default function Header() {
           width={142}
           className="h-[3.3rem] w-[5rem] mr-3"
         />
-        <div className="text-2xl font-extrabold text-blue-800">Archer</div>
       </Link>
       <div className="flex items-center justify-around text-lg gap-x-4">
         {user ? (

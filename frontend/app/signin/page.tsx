@@ -18,7 +18,7 @@ const SignIn = () => {
     try {
       await handleLogin(role, email, password);
       showAlert("Signed in successfully!", "success");
-      router.push("/");
+      router.push(`/dashboard_${role}`);
     } catch (err) {
       const error = err as { status: number };
       const status_code = error.status as number;
@@ -31,7 +31,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-sky-100">
+    <main className="flex flex-col items-center justify-center w-full py-8 grow bg-sky-100">
       <div className="w-full max-w-md px-12 py-4 bg-white rounded-lg shadow-md">
         <Image
           src="/icons/logo.png"
@@ -102,7 +102,7 @@ const SignIn = () => {
           </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 };
 

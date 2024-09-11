@@ -23,7 +23,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="w-full p-4 md:px-16 bg-sky-100">
+    <main className="grow w-full p-4 md:px-16 bg-sky-100">
       <div className="p-4 bg-white shadow-lg">
         <Image
           src="/icons/logo.png"

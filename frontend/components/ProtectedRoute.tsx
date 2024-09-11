@@ -1,6 +1,8 @@
+"use client";
 import { useContext, useEffect, ReactNode } from "react";
-import { useRouter } from "next/router";
-import AuthContext from "../context/AuthContext";
+import { useRouter } from "next/navigation";
+import AuthContext, { AuthContextProps } from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -8,26 +10,36 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
-  const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext) as AuthContextProps;
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   useEffect(() => {
-    if (
-      !authContext?.isAuthenticated() ||
-      (allowedRoles &&
-        typeof authContext.user?.role === "string" &&
-        !allowedRoles.includes(authContext.user.role))
-    ) {
-      router.push("/login");
-    }
-  }, [authContext, authContext?.user, allowedRoles, router]);
+    const checkUser = async () => {
+      if (!authContext.isAuthenticated()) {
+        // Attempt to refresh the token
+        const refreshed = await authContext.handleRefresh();
+        if (!refreshed) {
+          showAlert("You are not allowed to access this page.", "error");
+          router.push("/signin");
+          return;
+        }
+      }
 
-  return authContext?.isAuthenticated() &&
-    (!allowedRoles ||
-      (typeof authContext.user?.role === "string" &&
-        allowedRoles.includes(authContext.user.role))) ? (
-    <>{children}</>
-  ) : null;
+      if (
+        allowedRoles &&
+        typeof authContext.user?.role === "string" &&
+        !allowedRoles.includes(authContext.user.role)
+      ) {
+        showAlert("You are not allowed to access this page.", "error");
+        router.push("/signin");
+      }
+    };
+
+    checkUser();
+  }, [authContext, authContext?.user, allowedRoles, router, showAlert]);
+
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

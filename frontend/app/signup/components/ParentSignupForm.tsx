@@ -35,7 +35,7 @@ export default function ParentSignupForm() {
       if (data) {
         let errorString = "";
 
-        for (let key in data) {
+        for (const key in data) {
           if (data.hasOwnProperty(key)) {
             errorString += `${key}: ${data[key][0]}\n`;
           }

@@ -26,20 +26,20 @@ class LessonModelTest(TestCase):
     def test_create_lesson(self):
         """Test creating a Lesson instance with all fields."""
         lesson = Lesson.objects.create(
-            subject=Subject.ENGLISH,
+            subject=Subject.READING_WRITING,
             educator_id=self.educator,
             grade_level=10,
-            title="Introduction to English Literature",
-            text="This is a lesson about English Literature.",
+            title="Introduction to Reading & Writing",
+            text="This is a lesson about Reading & Writing.",
             video_link="http://example.com/video"
         )
-        self.assertEqual(lesson.subject, Subject.ENGLISH)
+        self.assertEqual(lesson.subject, Subject.READING_WRITING)
         self.assertEqual(lesson.educator_id, self.educator)
         self.assertEqual(lesson.grade_level, 10)
-        self.assertEqual(lesson.title, "Introduction to English Literature")
+        self.assertEqual(lesson.title, "Introduction to Reading & Writing")
         self.assertEqual(
             lesson.text,
-            "This is a lesson about English Literature.")
+            "This is a lesson about Reading & Writing.")
         self.assertEqual(lesson.video_link, "http://example.com/video")
 
     def test_create_lesson_without_video_link(self):
@@ -61,13 +61,13 @@ class LessonModelTest(TestCase):
     def test_create_lesson_without_educator(self):
         """Test creating a Lesson instance without an educator."""
         lesson = Lesson.objects.create(
-            subject=Subject.PHYSICS,
+            subject=Subject.SCIENCE,
             grade_level=11,
             title="Introduction to Quantum Mechanics",
             text="This is a lesson about Quantum Mechanics.",
             video_link="http://example.com/video"
         )
-        self.assertEqual(lesson.subject, Subject.PHYSICS)
+        self.assertEqual(lesson.subject, Subject.SCIENCE)
         self.assertIsNone(lesson.educator_id)
         self.assertEqual(lesson.grade_level, 11)
         self.assertEqual(lesson.title, "Introduction to Quantum Mechanics")
@@ -91,10 +91,9 @@ class LessonModelTest(TestCase):
     def test_valid_subjects(self):
         """Test creating Lesson instances with all valid subjects."""
         valid_subjects = [
-            Subject.ENGLISH,
+            Subject.READING_WRITING,
             Subject.MATHEMATICS,
-            Subject.PHYSICS,
-            Subject.SCIENCES]
+            Subject.SCIENCE]
 
         for subject in valid_subjects:
             lesson = Lesson.objects.create(

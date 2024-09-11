@@ -4,10 +4,9 @@ from enum import Enum
 class Subject(Enum):
     """Define our currently available subjects
     """
+    READING_WRITING = 'Reading & Writing'
     MATHEMATICS = 'Mathematics'
-    PHYSICS = 'Physics'
-    SCIENCES = 'Sciences'
-    ENGLISH = 'English'
+    SCIENCE = 'Science'
 
 
 class SensoryPreferences(Enum):

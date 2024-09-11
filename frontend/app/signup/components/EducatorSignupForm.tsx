@@ -14,13 +14,13 @@ export default function EducatorSignupForm() {
     last_name: "",
     parentId: "",
     grade_level: 0,
-    subject: "English",
+    subject: "Reading & Writing",
   });
   const { showAlert } = useAlert();
   const router = useRouter();
 
   // Subjects
-  const subjects = ["English", "Mathematics", "Sciences"];
+  const subjects = ["Reading & Writing", "Mathematics", "Science"];
 
   const handleSelect = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
@@ -44,7 +44,7 @@ export default function EducatorSignupForm() {
       if (data) {
         let errorString = "";
 
-        for (let key in data) {
+        for (const key in data) {
           if (data.hasOwnProperty(key)) {
             errorString += `${key}: ${data[key][0]}\n`;
           }

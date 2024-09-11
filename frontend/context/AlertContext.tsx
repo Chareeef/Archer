@@ -30,7 +30,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
     <AlertContext.Provider value={{ showAlert }}>
       {alert && (
         <div
-          className={`fixed top-[10svh] flex items-center justify-center px-2 py-1 rounded-lg text-center w-fit ${isVisible ? "opacity-100" : "opacity-0"} transition-all duration-500 ease-in-out ${getAlertClasses(alert.type)}`}
+          className={`fixed z-40 top-[10svh] flex items-center justify-center px-2 py-1 rounded-lg text-center w-fit ${isVisible ? "opacity-100" : "opacity-0"} transition-all duration-500 ease-in-out ${getAlertClasses(alert.type)}`}
         >
           {alert.message}
         </div>

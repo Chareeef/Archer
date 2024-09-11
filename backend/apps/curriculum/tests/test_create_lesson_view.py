@@ -96,7 +96,7 @@ class CreateLessonViewTests(APITestCase):
     def test_create_lesson_without_video_link(self):
         """Test creating a lesson without providing a video link."""
         data = {
-            'subject': 'English',
+            'subject': 'Reading & Writing',
             'grade_level': 10,
             'title': 'Algebra Basics',
             'text': 'Introduction to Algebra'

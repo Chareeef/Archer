@@ -58,7 +58,7 @@ class DeleteLessonViewTests(APITestCase):
             first_name="Other",
             last_name="Educator",
             password="otherpassword",
-            subject="Physics"
+            subject="Science"
         )
         other_token = get_token_for_user(other_educator)
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {other_token}')
