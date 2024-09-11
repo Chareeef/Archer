@@ -86,7 +86,49 @@ class Command(BaseCommand):
             ],
             enums.Subject.READING_WRITING: [
                 {"title": "Grammar Basics", "text": "# Grammar\nLet's dive into sentence structure."},
-                {"title": "Vocabulary Basics", "text": "# Vocabulary\nLet's dive into words' world."},
+            {
+                "title": "Understanding English Grammar",
+                "text": (
+                    "# Understanding English Grammar\n"
+                    "## Lesson Overview\n"
+                    "In this lesson, we will explore different aspects of English grammar, such as **sentence structure**, "
+                    "the use of **nouns, verbs, and adjectives**, and how to form coherent paragraphs.\n"
+
+                    "### What is a Sentence?\n"
+                    "A sentence is a group of words that expresses a complete thought. It usually contains a subject (the person, place, or thing being talked about) "
+                    "and a predicate (what is being said about the subject).\n"
+
+                    "For example:\n"
+                    "- The cat (subject) is sleeping (predicate).\n"
+                    "- **Important:** Sentences should always begin with a capital letter and end with a punctuation mark, such as a period.\n"
+
+                    "### Types of Sentences\n"
+                    "There are four main types of sentences:\n"
+                    "1. **Declarative:** States a fact or opinion. E.g., *She likes to read.*\n"
+                    "2. **Interrogative:** Asks a question. E.g., *Do you like ice cream?*\n"
+                    "3. **Imperative:** Gives a command. E.g., *Please close the door.*\n"
+                    "4. **Exclamatory:** Expresses strong emotion. E.g., *Wow, that was amazing!*\n"
+
+                    "### Using Nouns, Verbs, and Adjectives\n"
+                    "1. **Nouns** are names of people, places, or things. E.g., *cat, city, book.*\n"
+                    "2. **Verbs** show action or state of being. E.g., *run, jump, is.*\n"
+                    "3. **Adjectives** describe nouns. E.g., *beautiful, quick, tall.*\n"
+
+                    "### Paragraph Writing\n"
+                    "A paragraph is a group of sentences that focus on one idea. A well-written paragraph includes:\n"
+                    "- A **topic sentence** that introduces the main idea.\n"
+                    "- **Supporting sentences** that provide details or examples.\n"
+                    "- A **concluding sentence** that summarizes the paragraph.\n"
+
+                    "### Summary\n"
+                    "By understanding sentence structure and how to use nouns, verbs, and adjectives correctly, you can form better paragraphs and improve your writing skills.\n"
+
+                    "---\n"
+                    "## Homework Assignment\n"
+                    "Write a paragraph using at least three different types of sentences (declarative, interrogative, and exclamatory). "
+                    "Try to include **nouns**, **verbs**, and **adjectives** in your writing."
+                )
+            },
                 {"title": "Creative Writing", "text": "# Writing\nTips for improving your creative writing."},
                 {"title": "Reading Comprehension", "text": "# Reading\nStrategies to enhance understanding of texts."},
             ]

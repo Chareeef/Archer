@@ -3,6 +3,7 @@ import { useAlert } from "@/context/AlertContext";
 import { Lesson } from "@/types";
 import axiosClient from "@/utils/axiosClient";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function Lessons({
@@ -44,7 +45,8 @@ function Lessons({
       {lessons.length > 0 ? (
         <ul className="flex p-4 overflow-x-auto gap-x-4">
           {lessons.map((lesson) => (
-            <li
+            <Link
+              href={`/lesson/${lesson.id}`}
               className="flex flex-col w-[30%] shadow-md shrink-0 bg-amber-200 rounded-md"
               key={lesson.id}
             >
@@ -65,7 +67,7 @@ function Lessons({
                 <h2 className="text-lg">By {lesson.educator_full_name}</h2>
                 <p className="text-sm text-gray-600">{lesson.created_at}</p>
               </div>
-            </li>
+            </Link>
           ))}
         </ul>
       ) : (
