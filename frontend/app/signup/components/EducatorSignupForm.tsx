@@ -14,13 +14,13 @@ export default function EducatorSignupForm() {
     last_name: "",
     parentId: "",
     grade_level: 0,
-    subject: "English",
+    subject: "Reading & Writing",
   });
   const { showAlert } = useAlert();
   const router = useRouter();
 
   // Subjects
-  const subjects = ["English", "Mathematics", "Sciences"];
+  const subjects = ["Reading & Writing", "Mathematics", "Science"];
 
   const handleSelect = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });

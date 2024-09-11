@@ -86,6 +86,7 @@ class Command(BaseCommand):
             ],
             enums.Subject.READING_WRITING: [
                 {"title": "Grammar Basics", "text": "# Grammar\nLet's dive into sentence structure."},
+                {"title": "Vocabulary Basics", "text": "# Vocabulary\nLet's dive into words' world."},
                 {"title": "Creative Writing", "text": "# Writing\nTips for improving your creative writing."},
                 {"title": "Reading Comprehension", "text": "# Reading\nStrategies to enhance understanding of texts."},
             ]

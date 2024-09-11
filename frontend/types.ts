@@ -9,7 +9,7 @@ export interface Lesson {
   id: string;
   created_at: string;
   grade_level: number;
-  subject: "English" | "Mathematics" | "Science";
+  subject: "Reading & Writing" | "Mathematics" | "Science";
   educator_id: string;
   educator_full_name: string;
   title: string;
