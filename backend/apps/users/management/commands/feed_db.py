@@ -61,7 +61,7 @@ class Command(BaseCommand):
 
     def _create_educators(self):
         self.educators = []
-        subjects = [enums.Subject.ENGLISH, enums.Subject.MATHEMATICS, enums.Subject.SCIENCES]
+        subjects = [enums.Subject.READING_WRITING, enums.Subject.MATHEMATICS, enums.Subject.SCIENCE]
         for subject in subjects:
             educator = Educator.objects.create_user(
                 email=f'educator_joe_{subject.value}@example.com',
@@ -79,12 +79,12 @@ class Command(BaseCommand):
                 {"title": "Geometry Basics", "text": "# Geometry\nLet's explore the basics of geometry."},
                 {"title": "Calculus Intro", "text": "# Calculus\nIntroduction to calculus and derivatives."},
             ],
-            enums.Subject.SCIENCES: [
-                {"title": "Physics Principles", "text": "# Physics\nAn introduction to classical mechanics."},
+            enums.Subject.SCIENCE: [
+                {"title": "Science Principles", "text": "# Science\nAn introduction to classical mechanics."},
                 {"title": "Biology Overview", "text": "# Biology\nBasics of cell structure and functions."},
                 {"title": "Chemistry Essentials", "text": "# Chemistry\nUnderstanding the periodic table."},
             ],
-            enums.Subject.ENGLISH: [
+            enums.Subject.READING_WRITING: [
                 {"title": "Grammar Basics", "text": "# Grammar\nLet's dive into sentence structure."},
                 {"title": "Creative Writing", "text": "# Writing\nTips for improving your creative writing."},
                 {"title": "Reading Comprehension", "text": "# Reading\nStrategies to enhance understanding of texts."},

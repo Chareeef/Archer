@@ -284,7 +284,7 @@ class EducatorDetailViewTest(APITestCase):
             self.educator_token)
 
         update_data = {
-            'subject': 'Physics',
+            'subject': 'Science',
             'first_name': 'Severus'
         }
 
@@ -292,7 +292,7 @@ class EducatorDetailViewTest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.educator.refresh_from_db()
-        self.assertEqual(self.educator.subject._value_, 'Physics')
+        self.assertEqual(self.educator.subject._value_, 'Science')
         self.assertEqual(self.educator.first_name, 'Severus')
         self.assertEqual(self.educator.last_name, 'Example')
 
@@ -331,7 +331,7 @@ class EducatorDetailViewTest(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + wrong_token)
 
         update_data = {
-            'subject': 'Physics'
+            'subject': 'Science'
         }
 
         response = self.client.put(reverse('educator-detail'), update_data)

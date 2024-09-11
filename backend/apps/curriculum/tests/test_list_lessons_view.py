@@ -33,21 +33,21 @@ class ListLessonViewTests(APITestCase):
             educator_id=self.educator
         )
         self.lesson2 = Lesson.objects.create(
-            subject=Subject.SCIENCES,
+            subject=Subject.SCIENCE,
             grade_level=11,
             title='Biology Basics',
             text='Introduction to Biology',
             educator_id=self.educator
         )
         self.lesson3 = Lesson.objects.create(
-            subject=Subject.ENGLISH,
+            subject=Subject.READING_WRITING,
             grade_level=9,
             title='Grammar 101',
             text='Introduction to Grammar',
             educator_id=self.educator
         )
         self.lesson4 = Lesson.objects.create(
-            subject=Subject.ENGLISH,
+            subject=Subject.READING_WRITING,
             grade_level=12,
             title='Irregular Verbs',
             text='List of Irregular Verbs',
@@ -61,7 +61,7 @@ class ListLessonViewTests(APITestCase):
             educator_id=self.educator
         )
         self.lesson6 = Lesson.objects.create(
-            subject=Subject.SCIENCES,
+            subject=Subject.SCIENCE,
             grade_level=10,
             title='Chemistry Basics',
             text='Introduction to Chemistry',

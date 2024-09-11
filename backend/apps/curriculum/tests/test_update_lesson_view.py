@@ -49,19 +49,19 @@ class UpdateLessonViewTests(APITestCase):
     def test_total_update_lesson_as_owner(self):
         """Test totally updating a lesson as the educator who created it."""
         data = {
-            'subject': Subject.SCIENCES.value,
+            'subject': Subject.SCIENCE.value,
             'grade_level': 11,
-            'title': 'Physics Basics',
-            'text': 'Introduction to Physics',
+            'title': 'Science Basics',
+            'text': 'Introduction to Science',
             'video_link': 'http://example.com/new_video'
         }
         response = self.client.put(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.lesson.refresh_from_db()
-        self.assertEqual(self.lesson.subject, Subject.SCIENCES)
+        self.assertEqual(self.lesson.subject, Subject.SCIENCE)
         self.assertEqual(self.lesson.grade_level, 11)
-        self.assertEqual(self.lesson.title, 'Physics Basics')
-        self.assertEqual(self.lesson.text, 'Introduction to Physics')
+        self.assertEqual(self.lesson.title, 'Science Basics')
+        self.assertEqual(self.lesson.text, 'Introduction to Science')
         self.assertEqual(
             self.lesson.video_link,
             'http://example.com/new_video')
