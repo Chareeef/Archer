@@ -29,7 +29,7 @@ export default function LessonPage() {
     };
 
     fetchLesson();
-  }, []);
+  }, [id, showAlert]);
 
   return (
     <ProtectedRoute>
