@@ -53,6 +53,7 @@ MIDDLEWARE = [
 
 if os.getenv('ARCHER_ENV') == 'production':
     ALLOWED_HOSTS = ['.vercel.app']
+    CORS_ALLOWED_ORIGINS = ['https://archer-edu.vercel.app']
     DEBUG = False
 else:
     ALLOWED_HOSTS = ['*']
