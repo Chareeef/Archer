@@ -5,6 +5,7 @@ import axiosClient from "@/utils/axiosClient";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaCog } from "react-icons/fa";
 
 function Lessons({
   grade_level,
@@ -35,7 +36,7 @@ function Lessons({
     };
 
     fetchLessons();
-  }, []);
+  }, [grade_level]);
 
   return (
     <div>
@@ -79,9 +80,21 @@ function Lessons({
   );
 }
 
-export default function ListLessons({ grade_level }: { grade_level: number }) {
+export default function ListLessons({
+  grade_level,
+  onProfileOpen,
+}: {
+  grade_level: number;
+  onProfileOpen: () => void;
+}) {
   return (
-    <div className="p-4 md:col-span-3">
+    <div className="relative w-full p-4 md:col-span-3">
+      <button
+        onClick={onProfileOpen}
+        className="absolute p-2 text-xs text-gray-700 bg-white border-2 border-gray-700 rounded-lg top-2 right-2 md:hidden hover:scale-110 duration-300 ease-in-out"
+      >
+        <FaCog />
+      </button>
       <Lessons
         grade_level={grade_level}
         subject_key="reading_writing"

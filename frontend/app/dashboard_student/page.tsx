@@ -11,7 +11,8 @@ export default function StudentDashboard() {
   const [studentData, setStudentData] = useState<StudentDataFields | undefined>(
     undefined,
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,25 +25,30 @@ export default function StudentDashboard() {
     };
 
     fetchData();
-  }, [isModalOpen]);
+  }, [isSettingsOpen]);
 
   return (
     <ProtectedRoute allowedRoles={["student"]}>
       <main className="flex w-full grow bg-sky-100">
         {studentData ? (
           <>
-            <div className="md:grid md:grid-cols-4 md:gap-0">
+            <div className="relative h-full md:grid md:grid-cols-4 md:gap-0">
               <StudentProfile
                 studentData={studentData}
-                onOpen={() => setIsModalOpen(true)}
+                isProfileOpen={isProfileOpen}
+                onProfileClose={() => setIsProfileOpen(false)}
+                onSettingsOpen={() => setIsSettingsOpen(true)}
               />
-              <ListLessons grade_level={studentData.grade_level} />
+              <ListLessons
+                grade_level={studentData.grade_level}
+                onProfileOpen={() => setIsProfileOpen(true)}
+              />
             </div>
 
-            {isModalOpen && (
+            {isSettingsOpen && (
               <UpdateProfileModal
                 studentData={studentData}
-                onClose={() => setIsModalOpen(false)}
+                onClose={() => setIsSettingsOpen(false)}
               />
             )}
           </>
