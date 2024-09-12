@@ -22,6 +22,18 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en" className={OpenSans.className}>
+        <head>
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/favicon.ico" />
+
+          {/* Apple Touch Icon */}
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/icons/apple-touch-icon.png"
+          />
+        </head>
+
         <body className="relative flex flex-col items-center min-h-dvh">
           <AlertProvider>
             <Header />
