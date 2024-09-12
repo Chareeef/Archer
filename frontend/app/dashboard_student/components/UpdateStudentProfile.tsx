@@ -81,7 +81,7 @@ export default function UpdateProfileModal({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center p-8 bg-gray-800 h-dvh bg-opacity-50">
+    <div className="z-50 fixed inset-0 flex items-center justify-center p-8 bg-gray-800 h-dvh bg-opacity-50">
       <div className="relative w-full h-full text-sm bg-white rounded-lg shadow-lg md:text-lg">
         <div className="w-full h-full p-4 overflow-y-auto">
           <h2 className="mb-4 text-2xl font-bold">Update Profile</h2>
