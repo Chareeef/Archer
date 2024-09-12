@@ -36,7 +36,7 @@ function Lessons({
     };
 
     fetchLessons();
-  }, [grade_level]);
+  }, [grade_level, subject_value, showAlert]);
 
   return (
     <div>
