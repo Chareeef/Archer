@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { AlertProvider } from "@/context/AlertContext";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Archer",
@@ -27,6 +28,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </AlertProvider>
+          <Analytics />
         </body>
       </html>
     </AuthProvider>
